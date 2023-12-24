@@ -1,33 +1,38 @@
-<p>page-search works!</p>
-<form class="search-form">
-  <input
-    type="text"
-    class="search"
-    [(ngModel)]="searchInput"
-    (keyup)="displayMatches()"
-    (change)="displayMatches()"
-    placeholder="City or State"
-    [ngModelOptions]="{ standalone: true }"
-  />
+<div class="grid">
+  <div class="col-12">
+    <form class="search-form">
+      <div class="flex justify-content-center">
+        <input
+          type="text"
+          class="search"
+          [(ngModel)]="searchInput"
+          (keyup)="displayMatches()"
+          (change)="displayMatches()"
+          placeholder="City or State"
+          [ngModelOptions]="{ standalone: true }"
+        />
+      </div>
 
-  <ul class="suggestions">
-    <ng-container *ngIf="searchInput.length != 0; else defaultTemplate">
-      <ng-container
-        *ngIf="displayMatches().length != 0; else zeroResultTemplate"
-      >
-        <ng-container *ngFor="let city of displayMatches()">
-          <li class="suggestion">
-            <span class="name">{{ city.city }}, {{ city.state }}</span>
-          </li>
+      <ul class="suggestions">
+        <ng-container *ngIf="searchInput.length != 0; else defaultTemplate">
+          <ng-container
+            *ngIf="displayMatches().length != 0; else zeroResultTemplate"
+          >
+            <ng-container *ngFor="let city of displayMatches()">
+              <li class="suggestion">
+                <span class="name">{{ city.city }}, {{ city.state }}</span>
+              </li>
+            </ng-container>
+          </ng-container>
         </ng-container>
-      </ng-container>
-    </ng-container>
-    <ng-template #defaultTemplate>
-      <li class="suggestion">Filter for a city</li>
-      <li class="suggestion">or a state</li>
-    </ng-template>
-    <ng-template #zeroResultTemplate>
-      <li class="suggestion">There are no matching city or state.</li>
-    </ng-template>
-  </ul>
-</form>
+        <ng-template #defaultTemplate>
+          <li class="suggestion">Filter for a city</li>
+          <li class="suggestion">or a state</li>
+        </ng-template>
+        <ng-template #zeroResultTemplate>
+          <li class="suggestion">There are no matching city or state.</li>
+        </ng-template>
+      </ul>
+    </form>
+  </div>
+</div>
